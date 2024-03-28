@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://1rtje6r3iypg"]
-
-[ext_resource type="Texture2D" uid="uid://dmr0she7dn4hy" path="res://lablady_spritesheet_UNBOXED.png" id="1_ks0h8"]
-
-[node name="Player" type="Sprite2D"]
-texture_filter = 1
-texture = ExtResource("1_ks0h8")
-hframes = 6
-vframes = 12

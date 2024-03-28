@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmr0she7dn4hy"
-path="res://.godot/imported/lablady_spritesheet_UNBOXED.png-0d699f700641b20fb1325e811238ea94.ctex"
+uid="uid://bq65c1g4vlxnm"
+path="res://.godot/imported/lablady_spritesheet_BOXED.png-bbced2691bfa3c95960131b6870eb40a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://lablady_spritesheet_UNBOXED.png"
-dest_files=["res://.godot/imported/lablady_spritesheet_UNBOXED.png-0d699f700641b20fb1325e811238ea94.ctex"]
+source_file="res://Textures/lablady_spritesheet_BOXED.png"
+dest_files=["res://.godot/imported/lablady_spritesheet_BOXED.png-bbced2691bfa3c95960131b6870eb40a.ctex"]
 
 [params]
 
