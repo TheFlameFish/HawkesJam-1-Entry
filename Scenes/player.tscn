@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dsffyc8e6vgif"]
+[gd_scene load_steps=25 format=3 uid="uid://dsffyc8e6vgif"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_w3y5j"]
 [ext_resource type="Texture2D" uid="uid://dmr0she7dn4hy" path="res://Textures/lablady_spritesheet_UNBOXED.png" id="2_kqibw"]
@@ -206,7 +206,40 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r6y5i"]
 size = Vector2(11, 30)
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_itlhs"]
+animation = &"idle_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o4btg"]
+animation = &"run_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lot1f"]
+animation = &"walk_right"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qgejx"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2s2tr"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sf610"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_htgs2"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2elqn"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3xvsa"]
+states/Start/position = Vector2(255, 122)
+states/idle_right/node = SubResource("AnimationNodeAnimation_itlhs")
+states/idle_right/position = Vector2(501, 128)
+states/run_right/node = SubResource("AnimationNodeAnimation_o4btg")
+states/run_right/position = Vector2(654, 189)
+states/walk_right/node = SubResource("AnimationNodeAnimation_lot1f")
+states/walk_right/position = Vector2(677, 71)
+transitions = ["idle_right", "walk_right", SubResource("AnimationNodeStateMachineTransition_qgejx"), "walk_right", "idle_right", SubResource("AnimationNodeStateMachineTransition_2s2tr"), "idle_right", "run_right", SubResource("AnimationNodeStateMachineTransition_sf610"), "run_right", "idle_right", SubResource("AnimationNodeStateMachineTransition_htgs2"), "Start", "idle_right", SubResource("AnimationNodeStateMachineTransition_2elqn")]
+graph_offset = Vector2(-33, 1)
+
+[node name="Player" type="CharacterBody2D" groups=["EnemyTarget", "ImmuneTarget"]]
+collision_layer = 8
+platform_floor_layers = 4294967040
 script = ExtResource("1_w3y5j")
 
 [node name="Sprite" type="Sprite2D" parent="."]
@@ -224,3 +257,11 @@ libraries = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.499999, 0)
 shape = SubResource("RectangleShape2D_r6y5i")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Sprite")
+libraries = {
+"": SubResource("AnimationLibrary_01cc3")
+}
+tree_root = SubResource("AnimationNodeStateMachine_3xvsa")
+anim_player = NodePath("../Sprite/PlayerAnimation")

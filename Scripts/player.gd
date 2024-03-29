@@ -7,11 +7,16 @@ const SPEED = 150.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var animator
-var state 
+var sprite
+var state_machine
+
+var shield = 0
+var health = 3
 
 func _ready():
 	animator = $Sprite/PlayerAnimation
-	state = "Idle"
+	sprite = $Sprite
+	state_machine = $AnimationTree.get("parameters/playback")
 
 func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
@@ -23,6 +28,22 @@ func _physics_process(delta):
 	velocity = movement_vector
 	
 	# Animation
-	
+	if get_local_mouse_position().x < 0:      # direction_x < 0:
+		sprite.scale.x = -1
+	elif get_local_mouse_position().x > 0:      # direction_x > 0:
+		sprite.scale.x = 1
+		
+	if movement_vector != Vector2.ZERO:
+		state_machine.travel("walk_right")
+	else:
+		state_machine.travel("idle_right")
 
 	move_and_slide()
+
+func take_damage(damage):
+	if (shield > 0):
+		shield -= damage
+	else:
+		health -= damage
+	print("Health: " + str(health))
+	print("Shield: " + str(shield))

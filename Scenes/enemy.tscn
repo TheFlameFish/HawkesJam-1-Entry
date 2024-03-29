@@ -1,0 +1,126 @@
+[gd_scene load_steps=15 format=3 uid="uid://baefmaialchoi"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_n6g3a"]
+[ext_resource type="Texture2D" uid="uid://c3bqoto4aec5h" path="res://Textures/bacteria.png" id="1_w1rad"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kipgo"]
+size = Vector2(20, 6)
+
+[sub_resource type="Animation" id="Animation_q1kbl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ba6ee"]
+resource_name = "wiggle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_4cm78"]
+resource_name = "wiggle_slow"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_paybm"]
+_data = {
+"RESET": SubResource("Animation_q1kbl"),
+"wiggle": SubResource("Animation_ba6ee"),
+"wiggle_slow": SubResource("Animation_4cm78")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xp1qc"]
+animation = &"wiggle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7ioyx"]
+animation = &"wiggle_slow"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_px511"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nypyu"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_shuhq"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_pebrm"]
+states/wiggle/node = SubResource("AnimationNodeAnimation_xp1qc")
+states/wiggle/position = Vector2(381, 100)
+states/wiggle_slow/node = SubResource("AnimationNodeAnimation_7ioyx")
+states/wiggle_slow/position = Vector2(553, 37)
+transitions = ["Start", "wiggle", SubResource("AnimationNodeStateMachineTransition_px511"), "wiggle", "wiggle_slow", SubResource("AnimationNodeStateMachineTransition_nypyu"), "wiggle_slow", "wiggle", SubResource("AnimationNodeStateMachineTransition_shuhq")]
+graph_offset = Vector2(-15, -26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p4s3w"]
+size = Vector2(25, 13)
+
+[node name="Enemy" type="CharacterBody2D" groups=["ImmuneTarget"]]
+collision_layer = 2
+collision_mask = 15
+platform_floor_layers = 4294967040
+script = ExtResource("1_n6g3a")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_w1rad")
+hframes = 5
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, -1)
+shape = SubResource("RectangleShape2D_kipgo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_paybm")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_paybm")
+}
+tree_root = SubResource("AnimationNodeStateMachine_pebrm")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="DamageHitbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageHitbox"]
+position = Vector2(2.5, -1.5)
+shape = SubResource("RectangleShape2D_p4s3w")
+
+[connection signal="body_entered" from="DamageHitbox" to="." method="_on_damage_hitbox_body_entered"]
