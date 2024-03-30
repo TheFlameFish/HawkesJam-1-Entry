@@ -26,7 +26,7 @@ func _ready():
 	enemies_label = $HUD/WaveLabel/EnemiesLabel
 	immune_label = $HUD/WaveLabel/ImmuneLabel
 	await get_tree().create_timer(5).timeout
-	spawn_immune_system()
+
 	start_wave()
 
 

@@ -329,7 +329,7 @@ states/walk_right/position = Vector2(677, 71)
 transitions = ["idle_right", "walk_right", SubResource("AnimationNodeStateMachineTransition_qgejx"), "walk_right", "idle_right", SubResource("AnimationNodeStateMachineTransition_2s2tr"), "idle_right", "run_right", SubResource("AnimationNodeStateMachineTransition_sf610"), "run_right", "idle_right", SubResource("AnimationNodeStateMachineTransition_htgs2"), "Start", "idle_right", SubResource("AnimationNodeStateMachineTransition_2elqn"), "idle_right", "casting", SubResource("AnimationNodeStateMachineTransition_5blig"), "casting", "idle_right", SubResource("AnimationNodeStateMachineTransition_36x0p"), "idle_right", "punch", SubResource("AnimationNodeStateMachineTransition_agnfa"), "punch", "idle_right", SubResource("AnimationNodeStateMachineTransition_mp2nm")]
 graph_offset = Vector2(18, 42)
 
-[node name="Player" type="CharacterBody2D" groups=["EnemyTarget", "ImmuneTarget"]]
+[node name="Player" type="CharacterBody2D" groups=["EnemyTarget"]]
 collision_layer = 8
 platform_floor_layers = 4294967040
 script = ExtResource("1_w3y5j")
