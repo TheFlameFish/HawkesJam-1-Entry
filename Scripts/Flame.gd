@@ -10,6 +10,7 @@ var mana_loss = 20
 var mana_gain = 5
 
 var dmg_cooldown = 0
+var current_anim = "idle_right"
 
 var enabled = false
 var equipped = false
@@ -18,12 +19,14 @@ var player
 var collider
 var display
 var particles
+var state_machine
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player = $"../../.."
 	collider = $CollisionPolygon2D
 	particles = $GPUParticles2D
+	state_machine = $"../../../AnimationTree".get("parameters/playback")
 	set_range(25)
 	display = $Polygon2D
 
@@ -64,11 +67,14 @@ func enable():
 	enabled = true
 	collider.disabled = false
 	particles.emitting = true
+	state_machine.travel("casting")
 	
 func disable():
 	enabled = false
 	collider.disabled = true
 	particles.emitting = false
+	if current_anim == "casting":
+		state_machine.travel("idle_right")
 	
 func set_range(new_range):
 	range = new_range
@@ -88,3 +94,8 @@ func set_range(new_range):
 	#print("Flame collided")
 	#if body.is_in_group("PlayerDamageable") && body.has_method("take_damage"):
 		#body.take_damage(damage)
+
+
+
+func _on_animation_tree_animation_started(anim_name):
+	current_anim = anim_name

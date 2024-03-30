@@ -40,7 +40,10 @@ func _process(delta):
 		
 	wave_label.text = "Wave " + str(wave)
 	enemies_label.text = str(enemies_remaining) + " enemies remain"
-	immune_label.text = str(immune_remaining) + " immune cells remain"
+	if immune_remaining > 0:
+		immune_label.text = str(immune_remaining) + " immune cells remain"
+	else:
+		immune_label.text = ""
 
 func start_wave():
 	wave += 1

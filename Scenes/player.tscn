@@ -327,7 +327,7 @@ states/run_right/position = Vector2(654, 189)
 states/walk_right/node = SubResource("AnimationNodeAnimation_lot1f")
 states/walk_right/position = Vector2(677, 71)
 transitions = ["idle_right", "walk_right", SubResource("AnimationNodeStateMachineTransition_qgejx"), "walk_right", "idle_right", SubResource("AnimationNodeStateMachineTransition_2s2tr"), "idle_right", "run_right", SubResource("AnimationNodeStateMachineTransition_sf610"), "run_right", "idle_right", SubResource("AnimationNodeStateMachineTransition_htgs2"), "Start", "idle_right", SubResource("AnimationNodeStateMachineTransition_2elqn"), "idle_right", "casting", SubResource("AnimationNodeStateMachineTransition_5blig"), "casting", "idle_right", SubResource("AnimationNodeStateMachineTransition_36x0p"), "idle_right", "punch", SubResource("AnimationNodeStateMachineTransition_agnfa"), "punch", "idle_right", SubResource("AnimationNodeStateMachineTransition_mp2nm")]
-graph_offset = Vector2(18, 42)
+graph_offset = Vector2(-21, -31)
 
 [node name="Player" type="CharacterBody2D" groups=["EnemyTarget"]]
 collision_layer = 8
@@ -393,3 +393,4 @@ anim_player = NodePath("../Sprite/PlayerAnimation")
 
 [connection signal="body_entered" from="Sprite/Wand/Flame" to="." method="_on_flame_body_entered"]
 [connection signal="body_entered" from="Sprite/Wand/Flame" to="Sprite/Wand/Flame" method="_on_body_entered"]
+[connection signal="animation_started" from="AnimationTree" to="Sprite/Wand/Flame" method="_on_animation_tree_animation_started"]
