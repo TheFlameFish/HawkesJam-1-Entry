@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://ch5jab7mudhle"]
+[gd_scene load_steps=37 format=3 uid="uid://ch5jab7mudhle"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_dpscn"]
 [ext_resource type="PackedScene" uid="uid://dsffyc8e6vgif" path="res://Scenes/player.tscn" id="1_hlq75"]
@@ -10,9 +10,6 @@
 [ext_resource type="Script" path="res://Scripts/HealthDisplay.gd" id="8_l7xgn"]
 [ext_resource type="Texture2D" uid="uid://c8ghhv8kvd678" path="res://Textures/Heart2.png" id="8_wqfsx"]
 [ext_resource type="Script" path="res://Scripts/Heart.gd" id="9_hoebn"]
-[ext_resource type="Script" path="res://Scenes/SpellLabel.gd" id="11_2ryi5"]
-[ext_resource type="Texture2D" uid="uid://ckf0urvy84xsh" path="res://Textures/Health Bar Layer 1.png" id="12_y4byk"]
-[ext_resource type="Texture2D" uid="uid://dqydjvb4qikhi" path="res://Textures/ManaBarProgress.png" id="13_5enu5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_br70j"]
 resource_name = "Flesh Floor Full"
@@ -210,27 +207,6 @@ states/Shielded/position = Vector2(338, 208)
 transitions = ["Start", "Default", SubResource("AnimationNodeStateMachineTransition_xgrgo"), "Default", "Decay", SubResource("AnimationNodeStateMachineTransition_xjed8"), "Decay", "Regenerate", SubResource("AnimationNodeStateMachineTransition_whsus"), "Regenerate", "Default", SubResource("AnimationNodeStateMachineTransition_u8812"), "Default", "Shielded", SubResource("AnimationNodeStateMachineTransition_7n5y4"), "Shielded", "Default", SubResource("AnimationNodeStateMachineTransition_v6h8k")]
 graph_offset = Vector2(-66, -21)
 
-[sub_resource type="SystemFont" id="SystemFont_hp6pu"]
-font_names = PackedStringArray("Bahnschrift")
-
-[sub_resource type="LabelSettings" id="LabelSettings_a57cg"]
-font = SubResource("SystemFont_hp6pu")
-font_size = 64
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_u3txs"]
-font = SubResource("SystemFont_hp6pu")
-font_size = 32
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="SystemFont" id="SystemFont_vxesj"]
-font_names = PackedStringArray("Bahnschrift")
-
-[sub_resource type="LabelSettings" id="LabelSettings_u3gp2"]
-font = SubResource("SystemFont_vxesj")
-font_size = 32
-outline_color = Color(0, 0, 0, 1)
-
 [node name="Main" type="Node2D"]
 script = ExtResource("1_dpscn")
 
@@ -392,61 +368,3 @@ anim_player = NodePath("../AnimationPlayer")
 libraries = {
 "": SubResource("AnimationLibrary_pj2ij")
 }
-
-[node name="WaveLabel" type="Label" parent="HUD"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -51.0
-offset_top = 30.0
-offset_right = 51.0
-offset_bottom = 63.0
-grow_horizontal = 2
-text = "Wave #"
-label_settings = SubResource("LabelSettings_a57cg")
-horizontal_alignment = 1
-
-[node name="EnemiesLabel" type="Label" parent="HUD/WaveLabel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -134.0
-offset_top = 50.0
-offset_right = 134.0
-offset_bottom = 83.0
-grow_horizontal = 2
-text = "# Enemies Remain"
-label_settings = SubResource("LabelSettings_u3txs")
-horizontal_alignment = 1
-
-[node name="SpellLabel" type="Label" parent="HUD"]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -135.0
-offset_top = -45.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "Current Spell: #"
-label_settings = SubResource("LabelSettings_u3gp2")
-vertical_alignment = 1
-script = ExtResource("11_2ryi5")
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="HUD"]
-texture_filter = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = -48.0
-offset_right = 42.0
-offset_bottom = -40.0
-grow_vertical = 0
-scale = Vector2(5, 5)
-max_value = 32.0
-value = 10.0
-texture_under = ExtResource("12_y4byk")
-texture_progress = ExtResource("13_5enu5")

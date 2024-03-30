@@ -1,7 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://dsffyc8e6vgif"]
+[gd_scene load_steps=42 format=3 uid="uid://dsffyc8e6vgif"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_w3y5j"]
-[ext_resource type="Texture2D" uid="uid://dmr0she7dn4hy" path="res://Textures/lablady_spritesheet_UNBOXED.png" id="2_kqibw"]
+[ext_resource type="Texture2D" uid="uid://yqp5gfq2k6fm" path="res://Textures/doctor3.png" id="2_3nnn8"]
+[ext_resource type="Script" path="res://Scenes/Wand.gd" id="3_2v0h6"]
+[ext_resource type="Script" path="res://Scripts/Flame.gd" id="3_oabw3"]
+[ext_resource type="Script" path="res://Scenes/Punch.gd" id="4_ntvbj"]
 
 [sub_resource type="Animation" id="Animation_ti1v8"]
 length = 0.001
@@ -16,6 +19,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [30]
+}
+
+[sub_resource type="Animation" id="Animation_fkl00"]
+resource_name = "casting"
+length = 0.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [48, 49, 50]
 }
 
 [sub_resource type="Animation" id="Animation_fnbpv"]
@@ -83,7 +103,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [6, 7]
+"values": [3, 2]
 }
 
 [sub_resource type="Animation" id="Animation_gxgxo"]
@@ -117,7 +137,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [48, 49, 50, 51]
+"values": [24, 25, 26, 27]
 }
 
 [sub_resource type="Animation" id="Animation_ea8oq"]
@@ -185,16 +205,34 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [24, 25, 26, 27]
+"values": [8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_xqk5c"]
+resource_name = "punch"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [52, 53, 54, 55, 56, 55, 54, 53, 52]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_01cc3"]
 _data = {
 "RESET": SubResource("Animation_ti1v8"),
+"casting": SubResource("Animation_fkl00"),
 "idle_back": SubResource("Animation_fnbpv"),
 "idle_forward": SubResource("Animation_pm3hv"),
 "idle_left": SubResource("Animation_jdbdx"),
 "idle_right": SubResource("Animation_3te4p"),
+"punch": SubResource("Animation_xqk5c"),
 "run_left": SubResource("Animation_gxgxo"),
 "run_right": SubResource("Animation_57uc6"),
 "walk_back": SubResource("Animation_ea8oq"),
@@ -203,11 +241,51 @@ _data = {
 "walk_right": SubResource("Animation_qsf10")
 }
 
+[sub_resource type="Gradient" id="Gradient_polxt"]
+offsets = PackedFloat32Array(0, 0.508197, 1)
+colors = PackedColorArray(1, 0.822333, 0.18, 1, 1, 0.32549, 0.145098, 1, 0.164706, 0.164706, 0.164706, 0.568627)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2idl6"]
+gradient = SubResource("Gradient_polxt")
+
+[sub_resource type="Curve" id="Curve_0ef77"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.010989), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_dq8wp"]
+curve = SubResource("Curve_0ef77")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yegdj"]
+lifetime_randomness = 0.21
+particle_flag_disable_z = true
+angle_min = -436.9
+angle_max = 258.9
+inherit_velocity_ratio = 1.0
+spread = 75.0
+initial_velocity_min = 30.0
+initial_velocity_max = 70.0
+gravity = Vector3(0, -1, 0)
+scale_min = 2.0
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_dq8wp")
+scale_over_velocity_min = 1.0
+scale_over_velocity_max = 1.0
+color_ramp = SubResource("GradientTexture1D_2idl6")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rf7ue"]
+radius = 16.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r6y5i"]
 size = Vector2(11, 30)
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2t6sv"]
+animation = &"casting"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_itlhs"]
 animation = &"idle_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t57rk"]
+animation = &"punch"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o4btg"]
 animation = &"run_right"
@@ -226,16 +304,30 @@ animation = &"walk_right"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2elqn"]
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5blig"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_36x0p"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_agnfa"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mp2nm"]
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3xvsa"]
 states/Start/position = Vector2(255, 122)
+states/casting/node = SubResource("AnimationNodeAnimation_2t6sv")
+states/casting/position = Vector2(496, 18)
 states/idle_right/node = SubResource("AnimationNodeAnimation_itlhs")
 states/idle_right/position = Vector2(501, 128)
+states/punch/node = SubResource("AnimationNodeAnimation_t57rk")
+states/punch/position = Vector2(401, 222)
 states/run_right/node = SubResource("AnimationNodeAnimation_o4btg")
 states/run_right/position = Vector2(654, 189)
 states/walk_right/node = SubResource("AnimationNodeAnimation_lot1f")
 states/walk_right/position = Vector2(677, 71)
-transitions = ["idle_right", "walk_right", SubResource("AnimationNodeStateMachineTransition_qgejx"), "walk_right", "idle_right", SubResource("AnimationNodeStateMachineTransition_2s2tr"), "idle_right", "run_right", SubResource("AnimationNodeStateMachineTransition_sf610"), "run_right", "idle_right", SubResource("AnimationNodeStateMachineTransition_htgs2"), "Start", "idle_right", SubResource("AnimationNodeStateMachineTransition_2elqn")]
-graph_offset = Vector2(-33, 1)
+transitions = ["idle_right", "walk_right", SubResource("AnimationNodeStateMachineTransition_qgejx"), "walk_right", "idle_right", SubResource("AnimationNodeStateMachineTransition_2s2tr"), "idle_right", "run_right", SubResource("AnimationNodeStateMachineTransition_sf610"), "run_right", "idle_right", SubResource("AnimationNodeStateMachineTransition_htgs2"), "Start", "idle_right", SubResource("AnimationNodeStateMachineTransition_2elqn"), "idle_right", "casting", SubResource("AnimationNodeStateMachineTransition_5blig"), "casting", "idle_right", SubResource("AnimationNodeStateMachineTransition_36x0p"), "idle_right", "punch", SubResource("AnimationNodeStateMachineTransition_agnfa"), "punch", "idle_right", SubResource("AnimationNodeStateMachineTransition_mp2nm")]
+graph_offset = Vector2(18, 42)
 
 [node name="Player" type="CharacterBody2D" groups=["EnemyTarget", "ImmuneTarget"]]
 collision_layer = 8
@@ -244,15 +336,49 @@ script = ExtResource("1_w3y5j")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("2_kqibw")
-hframes = 6
-vframes = 12
+texture = ExtResource("2_3nnn8")
+hframes = 8
+vframes = 8
 frame = 30
 
 [node name="PlayerAnimation" type="AnimationPlayer" parent="Sprite"]
 libraries = {
 "": SubResource("AnimationLibrary_01cc3")
 }
+
+[node name="Wand" type="Node2D" parent="Sprite"]
+position = Vector2(8, -4)
+script = ExtResource("3_2v0h6")
+
+[node name="Flame" type="Area2D" parent="Sprite/Wand"]
+collision_mask = 6
+script = ExtResource("3_oabw3")
+
+[node name="Polygon2D" type="Polygon2D" parent="Sprite/Wand/Flame"]
+visible = false
+color = Color(1, 0, 0, 0.588235)
+polygon = PackedVector2Array(0, 0, 16, -7, 16, 7)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite/Wand/Flame"]
+position = Vector2(10, 0)
+scale = Vector2(0.625, 0.25)
+polygon = PackedVector2Array(-17.6, -12, -17.6, 12, 100, 60, 100, -92)
+disabled = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite/Wand/Flame"]
+scale = Vector2(0.625, 0.25)
+emitting = false
+amount = 80
+process_material = SubResource("ParticleProcessMaterial_yegdj")
+lifetime = 1.41
+
+[node name="Punch" type="Area2D" parent="Sprite/Wand"]
+collision_mask = 6
+script = ExtResource("4_ntvbj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Wand/Punch"]
+position = Vector2(5, 0)
+shape = SubResource("CircleShape2D_rf7ue")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.499999, 0)
@@ -265,3 +391,6 @@ libraries = {
 }
 tree_root = SubResource("AnimationNodeStateMachine_3xvsa")
 anim_player = NodePath("../Sprite/PlayerAnimation")
+
+[connection signal="body_entered" from="Sprite/Wand/Flame" to="." method="_on_flame_body_entered"]
+[connection signal="body_entered" from="Sprite/Wand/Flame" to="Sprite/Wand/Flame" method="_on_body_entered"]

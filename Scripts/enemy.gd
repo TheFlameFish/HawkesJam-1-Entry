@@ -2,18 +2,34 @@ extends CharacterBody2D
 
 const SPEED = 100
 var speed
+var max_health = 0
+@export var health = 1
 var target
+var health_bar
+var health_label
 
 var state_machine
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	health_bar = $TextureProgressBar
+	health_label = $TextureProgressBar/Label
 	speed = SPEED
 	state_machine = $AnimationTree.get("parameters/playback")
+	await get_tree().create_timer(0.1).timeout
+	max_health = health
 
+func _process(delta):
+	health_bar.value = health
+	health_bar.max_value = max_health
+	
+	health_label.text = str(health) + "/" + str(max_health)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	if (health <= 0):
+		queue_free()
+	
 	target = find_target()
 	
 	
@@ -53,3 +69,7 @@ func _on_damage_hitbox_body_entered(body):
 		state_machine.travel("wiggle_slow")
 		await get_tree().create_timer(1.6).timeout
 		speed = SPEED
+
+func take_damage(damage):
+	health -= damage
+	print(health)

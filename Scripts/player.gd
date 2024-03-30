@@ -12,11 +12,17 @@ var state_machine
 
 var shield = 0
 var health = 3
+var current_spell
+var obtained_spells
 
 func _ready():
 	animator = $Sprite/PlayerAnimation
 	sprite = $Sprite
 	state_machine = $AnimationTree.get("parameters/playback")
+
+func _process(delta):
+	current_spell = $Sprite/Wand.currentSpell
+	obtained_spells = $Sprite/Wand.obtainedSpells
 
 func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
@@ -45,5 +51,5 @@ func take_damage(damage):
 		shield -= damage
 	else:
 		health -= damage
-	print("Health: " + str(health))
-	print("Shield: " + str(shield))
+	#print("Health: " + str(health))
+	#print("Shield: " + str(shield))

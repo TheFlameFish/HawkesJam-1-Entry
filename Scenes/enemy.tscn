@@ -1,7 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://baefmaialchoi"]
+[gd_scene load_steps=18 format=3 uid="uid://baefmaialchoi"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_n6g3a"]
 [ext_resource type="Texture2D" uid="uid://c3bqoto4aec5h" path="res://Textures/bacteria.png" id="1_w1rad"]
+[ext_resource type="Texture2D" uid="uid://ckf0urvy84xsh" path="res://Textures/Health Bar Layer 1.png" id="3_73a4e"]
+[ext_resource type="Texture2D" uid="uid://c3xvucgja2r8x" path="res://Textures/Health Bar Layer 2.png" id="4_li02k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kipgo"]
 size = Vector2(20, 6)
@@ -87,7 +89,10 @@ graph_offset = Vector2(-15, -26)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p4s3w"]
 size = Vector2(25, 13)
 
-[node name="Enemy" type="CharacterBody2D" groups=["ImmuneTarget"]]
+[sub_resource type="LabelSettings" id="LabelSettings_da2dm"]
+font_size = 32
+
+[node name="Enemy" type="CharacterBody2D" groups=["Enemy", "ImmuneTarget", "PlayerDamageable"]]
 collision_layer = 2
 collision_mask = 15
 platform_floor_layers = 4294967040
@@ -122,5 +127,25 @@ collision_mask = 12
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageHitbox"]
 position = Vector2(2.5, -1.5)
 shape = SubResource("RectangleShape2D_p4s3w")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+texture_filter = 1
+offset_left = -13.5
+offset_top = -17.0
+offset_right = 18.5
+offset_bottom = -9.0
+texture_under = ExtResource("3_73a4e")
+texture_progress = ExtResource("4_li02k")
+
+[node name="Label" type="Label" parent="TextureProgressBar"]
+layout_mode = 0
+offset_left = 1.84
+offset_top = -0.5
+offset_right = 55.84
+offset_bottom = 44.5
+scale = Vector2(0.2, 0.2)
+text = "#/#"
+label_settings = SubResource("LabelSettings_da2dm")
+vertical_alignment = 1
 
 [connection signal="body_entered" from="DamageHitbox" to="." method="_on_damage_hitbox_body_entered"]
