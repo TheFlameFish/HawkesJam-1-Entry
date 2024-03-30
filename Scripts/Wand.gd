@@ -36,9 +36,27 @@ func check_inputs():
 			currentSpell = obtainedSpells[currentSpellIndex]
 			print(currentSpell)
 	
+	notify_equipped()
+	
 	if Input.is_action_pressed("spell_use"):
 		handle_spell()
+	else:
+		disable_spells()
 
 func handle_spell():
 	if currentSpell == "Punch":
 		punch_spell.punch()
+	elif currentSpell == "Flame":
+		flame_spell.enable()
+	
+func disable_spells():
+	flame_spell.disable()
+
+func notify_equipped():
+	punch_spell.equipped = false
+	flame_spell.equipped = false
+	
+	if currentSpell == "Punch":
+		punch_spell.equipped = true
+	elif currentSpell == "Flame":
+		flame_spell.equipped = true

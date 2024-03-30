@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://cox3j6qg1gq0b"]
+
+[ext_resource type="Script" path="res://Scripts/immune.gd" id="1_b7v6u"]
+[ext_resource type="Texture2D" uid="uid://bpylynfhl8j3q" path="res://Textures/macrophage.png" id="2_o45sv"]
+[ext_resource type="Texture2D" uid="uid://ckf0urvy84xsh" path="res://Textures/Health Bar Layer 1.png" id="3_wwsv1"]
+[ext_resource type="Texture2D" uid="uid://c3xvucgja2r8x" path="res://Textures/Health Bar Layer 2.png" id="4_y2sfu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kipgo"]
+size = Vector2(14, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p4s3w"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_da2dm"]
+font_size = 32
+
+[node name="ImmuneCell" type="CharacterBody2D" groups=["EnemyTarget", "Immune", "PlayerDamageable"]]
+collision_layer = 4
+collision_mask = 15
+platform_floor_layers = 4294967040
+script = ExtResource("1_b7v6u")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_o45sv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_kipgo")
+
+[node name="DamageHitbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageHitbox"]
+shape = SubResource("RectangleShape2D_p4s3w")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+texture_filter = 1
+offset_left = -16.0
+offset_top = -23.0
+offset_right = 16.0
+offset_bottom = -15.0
+texture_under = ExtResource("3_wwsv1")
+texture_progress = ExtResource("4_y2sfu")
+
+[node name="Label" type="Label" parent="TextureProgressBar"]
+layout_mode = 0
+offset_left = 1.84
+offset_top = -0.5
+offset_right = 55.84
+offset_bottom = 44.5
+scale = Vector2(0.2, 0.2)
+text = "#/#"
+label_settings = SubResource("LabelSettings_da2dm")
+vertical_alignment = 1
+
+[connection signal="body_entered" from="DamageHitbox" to="." method="_on_damage_hitbox_body_entered"]

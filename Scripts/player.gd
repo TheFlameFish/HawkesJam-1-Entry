@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 
 const SPEED = 150.0
+var speed = SPEED
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -12,6 +13,7 @@ var state_machine
 
 var shield = 0
 var health = 3
+var mana = 0
 var current_spell
 var obtained_spells
 
@@ -29,7 +31,7 @@ func _physics_process(delta):
 	var direction_x = Input.get_axis("move_left", "move_right")
 	var direction_y = Input.get_axis("move_up","move_down")
 		
-	var movement_vector = (Vector2(direction_x,direction_y) * SPEED).limit_length(SPEED)
+	var movement_vector = (Vector2(direction_x,direction_y) * speed).limit_length(speed)
 
 	velocity = movement_vector
 	

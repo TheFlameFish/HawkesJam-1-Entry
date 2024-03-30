@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 100
+const SPEED = 10
 var speed
 var max_health = 0
 @export var health = 1
@@ -11,15 +11,12 @@ var hitbox
 
 var cooldown = 0
 
-var state_machine
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	health_bar = $TextureProgressBar
 	health_label = $TextureProgressBar/Label
-	hitbox = $DamageHitbox
 	speed = SPEED
-	state_machine = $AnimationTree.get("parameters/playback")
+	hitbox = $DamageHitbox
 	await get_tree().create_timer(0.1).timeout
 	max_health = health
 
@@ -36,14 +33,18 @@ func _physics_process(delta):
 	
 	target = find_target()
 	
+	
 	if target != null:
 		var difference = Vector2(target.position - position)
 		velocity = difference.normalized() * speed
+		
+
 		
 		if (difference.x > 0):
 			$Sprite2D.flip_h = 0
 		elif (difference.x < 0):
 			$Sprite2D.flip_h = 1
+			
 	
 	cooldown -= delta
 	if cooldown <= 0:
@@ -51,8 +52,19 @@ func _physics_process(delta):
 	
 	move_and_slide()
 	
+func apply_damage():
+	var bodies = hitbox.get_overlapping_bodies()
+	if bodies.size() > 0:
+		cooldown = 1.6
+	for body in bodies:
+		if weakref(body).get_ref() && body.is_in_group("ImmuneTarget") && body.has_method("take_damage"):
+			body.take_damage(1)
+			speed = 0
+			await get_tree().create_timer(1.6).timeout
+			speed = SPEED
+	
 func find_target():
-	var all_targets = get_tree().get_nodes_in_group("EnemyTarget")
+	var all_targets = get_tree().get_nodes_in_group("ImmuneTarget")
 	var closest_target = null
 	
 	if (all_targets.size() > 0):
@@ -65,24 +77,11 @@ func find_target():
 		
 	return closest_target
 
-func apply_damage():
-	var bodies = hitbox.get_overlapping_bodies()
-	if bodies.size() > 0:
-		cooldown = 1.6
-	for body in bodies:
-		if weakref(body).get_ref() && body.is_in_group("EnemyTarget") && body.has_method("take_damage"):
-			body.take_damage(1)
-			speed = 0
-			state_machine.travel("wiggle_slow")
-			await get_tree().create_timer(1.6).timeout
-			speed = SPEED
-
 
 #func _on_damage_hitbox_body_entered(body):
-	#if body.is_in_group("EnemyTarget") && body.has_method("take_damage"):
+	#if body.is_in_group("ImmuneTarget") && body.has_method("take_damage"):
 		#body.take_damage(1)
 		#speed = 0
-		#state_machine.travel("wiggle_slow")
 		#await get_tree().create_timer(1.6).timeout
 		#speed = SPEED
 

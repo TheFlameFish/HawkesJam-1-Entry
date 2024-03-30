@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://ch5jab7mudhle"]
+[gd_scene load_steps=46 format=3 uid="uid://ch5jab7mudhle"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_dpscn"]
 [ext_resource type="PackedScene" uid="uid://dsffyc8e6vgif" path="res://Scenes/player.tscn" id="1_hlq75"]
@@ -10,9 +10,10 @@
 [ext_resource type="Script" path="res://Scripts/HealthDisplay.gd" id="8_l7xgn"]
 [ext_resource type="Texture2D" uid="uid://c8ghhv8kvd678" path="res://Textures/Heart2.png" id="8_wqfsx"]
 [ext_resource type="Script" path="res://Scripts/Heart.gd" id="9_hoebn"]
-[ext_resource type="Script" path="res://Scenes/SpellLabel.gd" id="11_2ryi5"]
+[ext_resource type="Script" path="res://Scripts/SpellLabel.gd" id="11_2ryi5"]
 [ext_resource type="Texture2D" uid="uid://ckf0urvy84xsh" path="res://Textures/Health Bar Layer 1.png" id="12_y4byk"]
 [ext_resource type="Texture2D" uid="uid://dqydjvb4qikhi" path="res://Textures/ManaBarProgress.png" id="13_5enu5"]
+[ext_resource type="Script" path="res://Scripts/ManaBar.gd" id="14_31fjk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_br70j"]
 resource_name = "Flesh Floor Full"
@@ -225,6 +226,7 @@ outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="SystemFont" id="SystemFont_vxesj"]
 font_names = PackedStringArray("Bahnschrift")
+subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_u3gp2"]
 font = SubResource("SystemFont_vxesj")
@@ -420,6 +422,20 @@ text = "# Enemies Remain"
 label_settings = SubResource("LabelSettings_u3txs")
 horizontal_alignment = 1
 
+[node name="ImmuneLabel" type="Label" parent="HUD/WaveLabel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -134.0
+offset_top = 80.0
+offset_right = 134.0
+offset_bottom = 113.0
+grow_horizontal = 2
+text = "# Immune Cells Remain"
+label_settings = SubResource("LabelSettings_u3txs")
+horizontal_alignment = 1
+
 [node name="SpellLabel" type="Label" parent="HUD"]
 anchors_preset = 3
 anchor_left = 1.0
@@ -435,7 +451,7 @@ label_settings = SubResource("LabelSettings_u3gp2")
 vertical_alignment = 1
 script = ExtResource("11_2ryi5")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="HUD"]
+[node name="ManaBar" type="TextureProgressBar" parent="HUD"]
 texture_filter = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -450,3 +466,4 @@ max_value = 32.0
 value = 10.0
 texture_under = ExtResource("12_y4byk")
 texture_progress = ExtResource("13_5enu5")
+script = ExtResource("14_31fjk")
