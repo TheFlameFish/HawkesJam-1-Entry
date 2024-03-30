@@ -28,6 +28,9 @@ func _process(delta):
 
 func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
+	if health <= 0:
+		get_tree().change_scene_to_file("res://Scenes/GameOverScreen.tscn")
+	
 	var direction_x = Input.get_axis("move_left", "move_right")
 	var direction_y = Input.get_axis("move_up","move_down")
 		
@@ -53,5 +56,9 @@ func take_damage(damage):
 		shield -= damage
 	else:
 		health -= damage
+		
+	var tween = get_tree().create_tween()
+	tween.tween_property($Sprite,"modulate",Color.RED,0.1)
+	tween.tween_property($Sprite,"modulate",Color.WHITE,0.2)
 	#print("Health: " + str(health))
 	#print("Shield: " + str(shield))

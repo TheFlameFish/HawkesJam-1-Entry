@@ -1,6 +1,7 @@
 extends Node2D
 
 var obtainedSpells = ["Punch","Flame"]
+var tiers = [0,1]
 
 var currentSpell = "Punch"
 var currentSpellIndex = 0
@@ -60,3 +61,4 @@ func notify_equipped():
 		punch_spell.equipped = true
 	elif currentSpell == "Flame":
 		flame_spell.equipped = true
+		flame_spell.tier = tiers[currentSpellIndex]

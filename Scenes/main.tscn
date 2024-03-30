@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://dqydjvb4qikhi" path="res://Textures/ManaBarProgress.png" id="13_5enu5"]
 [ext_resource type="Script" path="res://Scripts/ManaBar.gd" id="14_31fjk"]
 [ext_resource type="Texture2D" uid="uid://beijdr3xo8hyv" path="res://icon.svg" id="15_5175j"]
-[ext_resource type="Script" path="res://Scenes/SpellSelectionUI.gd" id="16_oscjm"]
+[ext_resource type="Script" path="res://Scripts/SpellSelectionUI.gd" id="16_oscjm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_br70j"]
 resource_name = "Flesh Floor Full"

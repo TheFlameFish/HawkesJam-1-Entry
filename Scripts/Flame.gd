@@ -27,7 +27,6 @@ func _ready():
 	collider = $CollisionPolygon2D
 	particles = $GPUParticles2D
 	state_machine = $"../../../AnimationTree".get("parameters/playback")
-	set_range(25)
 	display = $Polygon2D
 
 
@@ -54,6 +53,9 @@ func _physics_process(delta):
 	dmg_cooldown -= delta
 	if dmg_cooldown <= 0:
 		apply_damage()
+		
+	set_range(25 * tier * (mana/50))
+	print(25 * tier * (mana/50))
 	
 func apply_damage():
 	var bodies = get_overlapping_bodies()
@@ -84,7 +86,7 @@ func set_range(new_range):
 		Vector2(range,original_polygon[3].y)]
 	
 	#particles.lifetime = range * (1.41 / 16)
-	particles.amount = range * 5
+	#particles.amount = range * 5
 	particles.process_material.initial_velocity_min = range * (30/16)
 	particles.process_material.initial_velocity_min = range * (70/16)
 

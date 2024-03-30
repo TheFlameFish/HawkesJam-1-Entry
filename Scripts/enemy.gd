@@ -24,10 +24,10 @@ func _ready():
 	max_health = health
 
 func _process(delta):
-	health_bar.value = round_to_dec(health,2)
-	health_bar.max_value = max_health
+	health_bar.value = (round_to_dec(health,2) * 100)
+	health_bar.max_value = (max_health * 100)
 	
-	health_label.text = str(round_to_dec(health,2)) + "/" + str(max_health)
+	health_label.text = str(round_to_dec(health,2) * 100) + "/" + str(max_health * 100)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
