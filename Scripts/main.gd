@@ -6,7 +6,7 @@ var immune_remaining
 
 var available_spells
 var available_spells_tiers
-var spells = ["Punch","Flame"]
+var spells = ["Punch","Flame","Heal","Shield","Immune"]
 var spell_maximums = [1,3]
 
 @export var upper_bound = -100
@@ -61,7 +61,7 @@ func start_wave():
 	wave += 1
 	print("Starting wave " + str(wave))
 	random.randomize()
-	var enemy_spawn_number = random.randi_range(int(1+(wave/15)),int(3+(wave/10)))
+	var enemy_spawn_number = random.randi_range(int(1+(wave/10)),int(3+(wave/5)))
 	print("Spawning " + str(enemy_spawn_number) + " enemies")
 	for i in range(enemy_spawn_number):
 		spawn_enemy(enemy.instantiate())
@@ -82,11 +82,11 @@ func spawn_enemy(node):
 	print("Spawned enemy at " + str(node.position) + ":")
 	print(node)
 	random.randomize()
-	node.health = round(random.randf_range(1+(wave/10),3+(wave/3)))
+	node.health = round(random.randf_range(1+(wave/7),3+(wave/2)))
 	print("Enemy given health: " + str(node.health))
 	
 func spawn_immune_system():
-	var immune_spawn_number = random.randi_range(int(5+(wave/15)),int(10+(wave/10)))
+	var immune_spawn_number = random.randi_range(int(1+(wave/15)),int(2+(wave/10)))
 	print("Spawning " + str(immune_spawn_number) + " enemies")
 	for i in range(immune_spawn_number):
 		spawn_immune(immune.instantiate())
@@ -97,7 +97,7 @@ func spawn_immune(node):
 	print("Spawned immune cell at " + str(node.position) + ":")
 	print(node)
 	random.randomize()
-	node.health = round(random.randf_range(5+(wave/11),15+(wave/4)))
+	node.health = round(random.randf_range(1+(wave/11),5+(wave/4)))
 	print("Immune cell given health: " + str(node.health))
 
 func spell_selection():
@@ -113,7 +113,14 @@ func spell_selection():
 	var selected_spell = await spell_selection_ui.spell_selected
 	var selected_spell_index = spells.find(selected_spell)
 	
-	player.add_spell(selected_spell,spell_maximums[selected_spell_index])
+	if (selected_spell == "Heal"):
+		player.health = 3
+	elif (selected_spell == "Shield"):
+		player.shield = 3
+	elif (selected_spell == "Immune"):
+		spawn_immune_system()
+	else:
+		player.add_spell(selected_spell,spell_maximums[selected_spell_index])
 	
 	spell_selection_ui.vanish()
 	print("Spell Selection End")

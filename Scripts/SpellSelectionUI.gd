@@ -60,6 +60,19 @@ func updateButton(button : TextureButton, spell : String, tier : int):
 		button.tooltip_text = "Active Spell : Tier " + str(tier) + "
 			Holding down the mouse produces a flame that deals damage in a cone. 
 			The range and damage is based on tier and mana."
+	elif (spell == "Heal"):
+		button.texture_normal = ResourceLoader.load("res://Textures/spell_icons/Heart_Icon.png")
+		button.tooltip_text = "Event
+		Gives you full health for the next wave."
+	elif (spell == "Shield"):
+		button.texture_normal = ResourceLoader.load("res://Textures/spell_icons/Shield_Icon.png")
+		button.tooltip_text = "Event
+		Charges your shield, which gives you 3 extra hitpoints"
+	elif (spell == "Immune"):
+		button.texture_normal = ResourceLoader.load("res://Textures/spell_icons/Immune_Icon.png")
+		button.tooltip_text = "Event
+		Replenishes the patient's immune system, spawning a few immune cells to assist in fighting the virus.
+		The strength of this spell is proportional to the current wave."
 
 
 
