@@ -55,7 +55,6 @@ func _physics_process(delta):
 		apply_damage()
 		
 	set_range(25 * tier * (mana/50))
-	print(25 * tier * (mana/50))
 	
 func apply_damage():
 	var bodies = get_overlapping_bodies()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://ch5jab7mudhle"]
+[gd_scene load_steps=51 format=3 uid="uid://ch5jab7mudhle"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_dpscn"]
 [ext_resource type="PackedScene" uid="uid://dsffyc8e6vgif" path="res://Scenes/player.tscn" id="1_hlq75"]
@@ -14,8 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://ckf0urvy84xsh" path="res://Textures/Health Bar Layer 1.png" id="12_y4byk"]
 [ext_resource type="Texture2D" uid="uid://dqydjvb4qikhi" path="res://Textures/ManaBarProgress.png" id="13_5enu5"]
 [ext_resource type="Script" path="res://Scripts/ManaBar.gd" id="14_31fjk"]
-[ext_resource type="Texture2D" uid="uid://beijdr3xo8hyv" path="res://icon.svg" id="15_5175j"]
+[ext_resource type="Texture2D" uid="uid://bb8y3dim0b3ct" path="res://Textures/Selection_Box3.png" id="15_dadcx"]
 [ext_resource type="Script" path="res://Scripts/SpellSelectionUI.gd" id="16_oscjm"]
+[ext_resource type="Texture2D" uid="uid://caqq6xhiuukt1" path="res://Textures/Box.png" id="17_m1opn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_br70j"]
 resource_name = "Flesh Floor Full"
@@ -490,7 +491,7 @@ offset_top = -180.0
 offset_right = 212.0
 grow_horizontal = 2
 grow_vertical = 0
-texture = ExtResource("15_5175j")
+texture = ExtResource("15_dadcx")
 script = ExtResource("16_oscjm")
 
 [node name="Control" type="Control" parent="HUD/SpellSelection"]
@@ -501,8 +502,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -212.0
-offset_top = -150.0
+offset_top = -151.0
 offset_right = 212.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -512,13 +514,14 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 15.0
+offset_left = 16.0
 offset_top = -64.0
-offset_right = 143.0
-offset_bottom = 64.0
+offset_right = 48.0
+offset_bottom = -32.0
 grow_vertical = 2
+scale = Vector2(4, 4)
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource("15_5175j")
+texture_normal = ExtResource("17_m1opn")
 
 [node name="Option2" type="TextureButton" parent="HUD/SpellSelection/Control"]
 texture_filter = 1
@@ -535,7 +538,8 @@ offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource("15_5175j")
+texture_normal = ExtResource("17_m1opn")
+stretch_mode = 0
 
 [node name="Option3" type="TextureButton" parent="HUD/SpellSelection/Control"]
 texture_filter = 1
@@ -545,14 +549,15 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -143.0
+offset_left = -144.0
 offset_top = -64.0
-offset_right = -15.0
+offset_right = -16.0
 offset_bottom = 64.0
 grow_horizontal = 0
 grow_vertical = 2
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource("15_5175j")
+texture_normal = ExtResource("17_m1opn")
+stretch_mode = 0
 
 [node name="Label" type="Label" parent="HUD/SpellSelection"]
 layout_mode = 1
@@ -568,3 +573,7 @@ label_settings = SubResource("LabelSettings_8cfct")
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
+
+[connection signal="pressed" from="HUD/SpellSelection/Control/Option1" to="HUD/SpellSelection" method="_on_option_1_pressed"]
+[connection signal="pressed" from="HUD/SpellSelection/Control/Option2" to="HUD/SpellSelection" method="_on_option_2_pressed"]
+[connection signal="pressed" from="HUD/SpellSelection/Control/Option3" to="HUD/SpellSelection" method="_on_option_3_pressed"]

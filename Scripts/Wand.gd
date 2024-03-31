@@ -1,23 +1,26 @@
 extends Node2D
 
-var obtainedSpells = ["Punch","Flame"]
-var tiers = [0,1]
+var obtainedSpells = ["Punch"]
+var tiers = [1]
+var max_tiers = [1]
 
 var currentSpell = "Punch"
 var currentSpellIndex = 0
 
-var punch_spell
-var flame_spell
+var player : CharacterBody2D
+var punch_spell : Area2D
+var flame_spell : Area2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	punch_spell = $Punch
 	flame_spell = $Flame
-
+	player = $"../.."
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	check_inputs()
+	player.obtained_spells = obtainedSpells
 
 func check_inputs():
 	if Input.is_action_just_released("spell_next"):
@@ -62,3 +65,48 @@ func notify_equipped():
 	elif currentSpell == "Flame":
 		flame_spell.equipped = true
 		flame_spell.tier = tiers[currentSpellIndex]
+
+func get_maxed_spells() -> Array:
+	var maxed_spells : Array = []
+	var index = 0
+	for spell in obtainedSpells:
+		if tiers[index] >= max_tiers[index]:
+			maxed_spells.append(spell)
+		index += 1
+	return maxed_spells
+
+func get_spells_next_tiers(spells):
+	var index = 0
+	var next_tiers : Array = []
+	for spell in spells:
+		var spell_index = obtainedSpells.find(spell)
+		if spell_index != -1:
+			next_tiers.append(tiers[spell_index]+1)
+		else:
+			next_tiers.append(1)
+		index += 1
+	return next_tiers
+	
+func add_spell(spell, max_tier):
+	obtainedSpells.append(spell)
+	max_tiers.append(max_tier)
+	tiers.append(1)
+	
+func upgrade_spell(spell):
+	tiers[obtainedSpells.find(spell)] += 1
+	
+static func subtract(a: Array, b: Array) -> Array:
+	var result := []
+	var bag := {}
+	for item in b:
+		if not bag.has(item):
+			bag[item] = 0
+		bag[item] += 1
+	for item in a:
+		if bag.has(item):
+			bag[item] -= 1
+			if bag[item] == 0:
+				bag.erase(item)
+		else:
+			result.append(item)
+	return result

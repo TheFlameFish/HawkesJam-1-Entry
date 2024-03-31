@@ -31,7 +31,7 @@ func punch():
 	if !on_cooldown:
 		state_machine.travel("punch")
 		var potential_hits = get_overlapping_bodies()
-		print(potential_hits)
+
 		
 		for object in potential_hits:
 			if object.is_in_group("PlayerDamageable") && object.has_method("take_damage"):

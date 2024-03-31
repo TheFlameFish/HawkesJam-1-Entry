@@ -10,17 +10,19 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var animator
 var sprite
 var state_machine
+var wand : Node2D
 
 var shield = 0
 var health = 3
 var mana = 0
 var current_spell
-var obtained_spells
+var obtained_spells : Array
 
 func _ready():
 	animator = $Sprite/PlayerAnimation
 	sprite = $Sprite
 	state_machine = $AnimationTree.get("parameters/playback")
+	wand = $Sprite/Wand
 
 func _process(delta):
 	current_spell = $Sprite/Wand.currentSpell
@@ -62,3 +64,24 @@ func take_damage(damage):
 	tween.tween_property($Sprite,"modulate",Color.WHITE,0.2)
 	#print("Health: " + str(health))
 	#print("Shield: " + str(shield))
+
+func get_maxed_spells() -> Array:
+	return wand.get_maxed_spells()
+
+func get_spells_next_tiers(spells : Array):
+	return wand.get_spells_next_tiers(spells)
+
+func add_spells(spells : Array, maximums : Array):
+	var index = 0
+	for spell in spells:
+		if obtained_spells.has(spell):
+			wand.upgrade_spell(spell)
+		else:
+			wand.add_spell(spell,maximums[index])
+		index += 1
+
+func add_spell(spell, maximum_tier):
+	if obtained_spells.has(spell):
+		wand.upgrade_spell(spell)
+	else:
+		wand.add_spell(spell,maximum_tier)
