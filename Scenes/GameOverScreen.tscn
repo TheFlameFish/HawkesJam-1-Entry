@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://gtufsfnhco7t"]
+[gd_scene load_steps=8 format=3 uid="uid://gtufsfnhco7t"]
 
 [ext_resource type="Script" path="res://Scripts/GameOverScreen.gd" id="1_b2nlf"]
+[ext_resource type="AudioStream" uid="uid://q64nbujd2vpo" path="res://Sounds/lose.wav" id="2_ouy8p"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pqip5"]
 bg_color = Color(0.152941, 0.152941, 0.152941, 1)
@@ -65,6 +66,9 @@ layout_mode = 2
 theme_override_fonts/font = SubResource("SystemFont_lqorg")
 theme_override_font_sizes/font_size = 32
 text = "Exit"
+
+[node name="LoseSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_ouy8p")
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

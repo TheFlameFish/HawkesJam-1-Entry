@@ -12,6 +12,8 @@ var sprite
 var state_machine
 var wand : Node2D
 
+var hurt_sfx : AudioStreamPlayer
+
 var shield = 0
 var health = 3
 var mana = 0
@@ -23,6 +25,7 @@ func _ready():
 	sprite = $Sprite
 	state_machine = $AnimationTree.get("parameters/playback")
 	wand = $Sprite/Wand
+	hurt_sfx = $Hurt
 
 func _process(delta):
 	current_spell = $Sprite/Wand.currentSpell
@@ -62,6 +65,10 @@ func take_damage(damage):
 	var tween = get_tree().create_tween()
 	tween.tween_property($Sprite,"modulate",Color.RED,0.1)
 	tween.tween_property($Sprite,"modulate",Color.WHITE,0.2)
+	
+	await get_tree().create_timer(0.05).timeout
+	
+	hurt_sfx.play()
 	#print("Health: " + str(health))
 	#print("Shield: " + str(shield))
 
