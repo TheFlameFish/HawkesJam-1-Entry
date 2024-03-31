@@ -23,6 +23,8 @@ var wave_label
 var enemies_label
 var immune_label
 
+var waiting_for_spell_selection = false
+
 var random = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
@@ -42,9 +44,11 @@ func _process(delta):
 	enemies_remaining = get_tree().get_nodes_in_group("Enemy").size()
 	immune_remaining = get_tree().get_nodes_in_group("Immune").size()
 	
-	if enemies_remaining == 0 && wave != 0:
+	if enemies_remaining == 0 && wave != 0 && !waiting_for_spell_selection:
+		waiting_for_spell_selection = true
 		await spell_selection()
 		start_wave()
+		waiting_for_spell_selection = false
 		
 	wave_label.text = "Wave " + str(wave)
 	enemies_label.text = str(enemies_remaining) + " enemies remain"
