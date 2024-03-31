@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://ch5jab7mudhle"]
+[gd_scene load_steps=54 format=3 uid="uid://ch5jab7mudhle"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_dpscn"]
 [ext_resource type="PackedScene" uid="uid://dsffyc8e6vgif" path="res://Scenes/player.tscn" id="1_hlq75"]
@@ -17,6 +17,9 @@
 [ext_resource type="Texture2D" uid="uid://bb8y3dim0b3ct" path="res://Textures/Selection_Box3.png" id="15_dadcx"]
 [ext_resource type="Script" path="res://Scripts/SpellSelectionUI.gd" id="16_oscjm"]
 [ext_resource type="Texture2D" uid="uid://caqq6xhiuukt1" path="res://Textures/Box.png" id="17_m1opn"]
+[ext_resource type="Script" path="res://Scenes/MusicPlayer.gd" id="18_tqslb"]
+[ext_resource type="AudioStream" uid="uid://bupv7rno8oisi" path="res://Sounds/music/Bionaut-battle-intro.ogg" id="19_qwflx"]
+[ext_resource type="AudioStream" uid="uid://b7uonw6dsanvi" path="res://Sounds/music/Bionaut-battle-loop.ogg" id="20_eijkt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_br70j"]
 resource_name = "Flesh Floor Full"
@@ -574,6 +577,29 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
+[node name="ScoreLabel" type="Label" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -348.0
+offset_top = 25.0
+offset_right = -30.0
+offset_bottom = 90.0
+grow_horizontal = 0
+text = "Score: ###"
+label_settings = SubResource("LabelSettings_a57cg")
+horizontal_alignment = 1
+
+[node name="MusicPlayer" type="Node" parent="."]
+script = ExtResource("18_tqslb")
+
+[node name="BattleIntro" type="AudioStreamPlayer" parent="MusicPlayer"]
+stream = ExtResource("19_qwflx")
+
+[node name="BattleLoop" type="AudioStreamPlayer" parent="MusicPlayer"]
+stream = ExtResource("20_eijkt")
+
 [connection signal="pressed" from="HUD/SpellSelection/Control/Option1" to="HUD/SpellSelection" method="_on_option_1_pressed"]
 [connection signal="pressed" from="HUD/SpellSelection/Control/Option2" to="HUD/SpellSelection" method="_on_option_2_pressed"]
 [connection signal="pressed" from="HUD/SpellSelection/Control/Option3" to="HUD/SpellSelection" method="_on_option_3_pressed"]
+[connection signal="finished" from="MusicPlayer/BattleIntro" to="MusicPlayer" method="_on_battle_intro_finished"]

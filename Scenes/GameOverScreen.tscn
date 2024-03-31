@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://gtufsfnhco7t"]
+[gd_scene load_steps=9 format=3 uid="uid://gtufsfnhco7t"]
 
 [ext_resource type="Script" path="res://Scripts/GameOverScreen.gd" id="1_b2nlf"]
 [ext_resource type="AudioStream" uid="uid://q64nbujd2vpo" path="res://Sounds/lose.wav" id="2_ouy8p"]
@@ -12,6 +12,10 @@ font_names = PackedStringArray("Bahnschrift")
 [sub_resource type="LabelSettings" id="LabelSettings_077ju"]
 font = SubResource("SystemFont_ng7j2")
 font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_f7wom"]
+font = SubResource("SystemFont_ng7j2")
+font_size = 32
 
 [sub_resource type="SystemFont" id="SystemFont_bsjcy"]
 font_names = PackedStringArray("Bahnschrift")
@@ -41,27 +45,37 @@ theme_override_constants/margin_bottom = 40
 layout_mode = 2
 theme_override_constants/separation = 170
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/Rows"]
+[node name="GameOver" type="Label" parent="PanelContainer/MarginContainer/Rows"]
 layout_mode = 2
 text = "Game Over"
 label_settings = SubResource("LabelSettings_077ju")
 horizontal_alignment = 1
 
+[node name="ScoreLabel" type="Label" parent="PanelContainer/MarginContainer/Rows/GameOver"]
+layout_mode = 2
+offset_top = 75.0
+offset_right = 1072.0
+offset_bottom = 140.0
+text = "Score: ###"
+label_settings = SubResource("LabelSettings_f7wom")
+horizontal_alignment = 1
+
 [node name="CenterContainer" type="CenterContainer" parent="PanelContainer/MarginContainer/Rows"]
 layout_mode = 2
+size_flags_vertical = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/Rows/CenterContainer"]
+[node name="Rows" type="VBoxContainer" parent="PanelContainer/MarginContainer/Rows/CenterContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 40
 
-[node name="Restart" type="Button" parent="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer"]
+[node name="Restart" type="Button" parent="PanelContainer/MarginContainer/Rows/CenterContainer/Rows"]
 layout_mode = 2
 theme_override_fonts/font = SubResource("SystemFont_bsjcy")
 theme_override_font_sizes/font_size = 32
 text = " Restart "
 
-[node name="Exit" type="Button" parent="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer"]
+[node name="Exit" type="Button" parent="PanelContainer/MarginContainer/Rows/CenterContainer/Rows"]
 layout_mode = 2
 theme_override_fonts/font = SubResource("SystemFont_lqorg")
 theme_override_font_sizes/font_size = 32
@@ -70,5 +84,5 @@ text = "Exit"
 [node name="LoseSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_ouy8p")
 
-[connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/Rows/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/Rows/Exit" to="." method="_on_exit_pressed"]

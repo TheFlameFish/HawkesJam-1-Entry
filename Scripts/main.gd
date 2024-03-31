@@ -1,7 +1,9 @@
 extends Node2D
 
 var wave = 0
-var enemies_remaining
+var score = 0
+var enemies_remaining = 0
+var enemies_remaining_last_frame = 0
 var immune_remaining
 
 var available_spells
@@ -22,6 +24,8 @@ var spell_selection_ui
 var wave_label
 var enemies_label
 var immune_label
+var score_label : Label
+var music_player
 
 var waiting_for_spell_selection = false
 
@@ -29,11 +33,15 @@ var random = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	score = Global.score
+	
 	player = $Player
 	spell_selection_ui = $HUD/SpellSelection
 	wave_label = $HUD/WaveLabel
 	enemies_label = $HUD/WaveLabel/EnemiesLabel
 	immune_label = $HUD/WaveLabel/ImmuneLabel
+	score_label = $HUD/ScoreLabel
+	music_player = $MusicPlayer
 	await get_tree().create_timer(5).timeout
 
 	start_wave()
@@ -44,7 +52,16 @@ func _process(delta):
 	enemies_remaining = get_tree().get_nodes_in_group("Enemy").size()
 	immune_remaining = get_tree().get_nodes_in_group("Immune").size()
 	
+	if enemies_remaining_last_frame > enemies_remaining:
+		score += (enemies_remaining_last_frame - enemies_remaining) + wave
+		print((enemies_remaining_last_frame - enemies_remaining) + wave)
+	enemies_remaining_last_frame = enemies_remaining
+	
+	Global.score = score
+	score_label.text = "Score: " + str(score)
+	
 	if enemies_remaining == 0 && wave != 0 && !waiting_for_spell_selection:
+		music_player.stop_battle()
 		waiting_for_spell_selection = true
 		await spell_selection()
 		start_wave()
@@ -58,10 +75,13 @@ func _process(delta):
 		immune_label.text = ""
 
 func start_wave():
+	music_player.play_battle()
 	wave += 1
 	print("Starting wave " + str(wave))
 	random.randomize()
 	var enemy_spawn_number = random.randi_range(int(1+(wave/10)),int(3+(wave/5)))
+	enemies_remaining = enemy_spawn_number
+	enemies_remaining_last_frame = enemy_spawn_number
 	print("Spawning " + str(enemy_spawn_number) + " enemies")
 	for i in range(enemy_spawn_number):
 		spawn_enemy(enemy.instantiate())
