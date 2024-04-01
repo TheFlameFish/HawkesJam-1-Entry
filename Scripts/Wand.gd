@@ -10,11 +10,13 @@ var currentSpellIndex = 0
 var player : CharacterBody2D
 var punch_spell : Area2D
 var flame_spell : Area2D
+var fireball_spell : Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	punch_spell = $Punch
 	flame_spell = $Flame
+	fireball_spell = $Fireball
 	player = $"../.."
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -52,6 +54,8 @@ func handle_spell():
 		punch_spell.punch()
 	elif currentSpell == "Flame":
 		flame_spell.enable()
+	elif currentSpell == "Fireball":
+		fireball_spell.fire()
 	
 func disable_spells():
 	flame_spell.disable()
@@ -65,6 +69,10 @@ func notify_equipped():
 	elif currentSpell == "Flame":
 		flame_spell.equipped = true
 		flame_spell.tier = tiers[currentSpellIndex]
+	elif currentSpell == "Fireball":
+		fireball_spell.equipped = true
+		fireball_spell.tier = tiers[currentSpellIndex]
+	
 
 func get_maxed_spells() -> Array:
 	var maxed_spells : Array = []

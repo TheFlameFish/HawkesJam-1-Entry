@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://bb8y3dim0b3ct" path="res://Textures/Selection_Box3.png" id="15_dadcx"]
 [ext_resource type="Script" path="res://Scripts/SpellSelectionUI.gd" id="16_oscjm"]
 [ext_resource type="Texture2D" uid="uid://caqq6xhiuukt1" path="res://Textures/Box.png" id="17_m1opn"]
-[ext_resource type="Script" path="res://Scenes/MusicPlayer.gd" id="18_tqslb"]
+[ext_resource type="Script" path="res://Scripts/MusicPlayer.gd" id="18_tqslb"]
 [ext_resource type="AudioStream" uid="uid://bupv7rno8oisi" path="res://Sounds/music/Bionaut-battle-intro.ogg" id="19_qwflx"]
 [ext_resource type="AudioStream" uid="uid://b7uonw6dsanvi" path="res://Sounds/music/Bionaut-battle-loop.ogg" id="20_eijkt"]
 

@@ -57,22 +57,34 @@ func setup(available_spells: Array,available_spells_tiers: Array):
 func updateButton(button : TextureButton, spell : String, tier : int):
 	if (spell == "Flame"):
 		button.texture_normal = ResourceLoader.load("res://Textures/spell_icons/Flame_Icon.png")
-		button.tooltip_text = "Active Spell : Tier " + str(tier) + "
+		button.tooltip_text = "Flame
+			Active Spell : Tier " + str(tier) + "
 			Holding down the mouse produces a flame that deals damage in a cone. 
 			The range and damage is based on tier and mana."
 	elif (spell == "Heal"):
 		button.texture_normal = ResourceLoader.load("res://Textures/spell_icons/Heart_Icon.png")
-		button.tooltip_text = "Event
-		Gives you full health for the next wave."
+		button.tooltip_text = "Heal
+			Event
+			Gives you full health for the next wave."
 	elif (spell == "Shield"):
 		button.texture_normal = ResourceLoader.load("res://Textures/spell_icons/Shield_Icon.png")
-		button.tooltip_text = "Event
-		Charges your shield, which gives you 3 extra hitpoints"
+		button.tooltip_text = "Shield
+			Event
+			Charges your shield, which gives you 3 extra hitpoints"
 	elif (spell == "Immune"):
 		button.texture_normal = ResourceLoader.load("res://Textures/spell_icons/Immune_Icon.png")
-		button.tooltip_text = "Event
-		Replenishes the patient's immune system, spawning a few immune cells to assist in fighting the virus.
-		The strength of this spell is proportional to the current wave."
+		button.tooltip_text = "Replenish Immune System
+			Event
+			Replenishes the patient's immune system, spawning a few immune cells to assist in fighting the virus.
+			The strength of this spell is scaled to the current wave."
+	elif (spell == "Fireball"):
+		button.texture_normal = ResourceLoader.load("res://Textures/spell_icons/Fireball_Icon.png")
+		button.tooltip_text = "Fireball
+			Active Spell
+			Shoots a fireball which deals 1000 damage to any enemy it hits."
+	else:
+		button.texture_normal = ResourceLoader.load("res://Textures/Box.png")
+		button.tooltip_text = spell
 
 
 

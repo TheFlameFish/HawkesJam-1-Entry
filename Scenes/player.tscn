@@ -1,10 +1,11 @@
-[gd_scene load_steps=43 format=3 uid="uid://dsffyc8e6vgif"]
+[gd_scene load_steps=44 format=3 uid="uid://dsffyc8e6vgif"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_w3y5j"]
 [ext_resource type="Texture2D" uid="uid://yqp5gfq2k6fm" path="res://Textures/doctor3.png" id="2_3nnn8"]
 [ext_resource type="Script" path="res://Scripts/Wand.gd" id="3_2v0h6"]
 [ext_resource type="Script" path="res://Scripts/Flame.gd" id="3_oabw3"]
 [ext_resource type="Script" path="res://Scripts/Punch.gd" id="4_ntvbj"]
+[ext_resource type="Script" path="res://Scripts/Fireball.gd" id="6_f2vec"]
 [ext_resource type="AudioStream" uid="uid://cmutg3dnaa5a6" path="res://Sounds/hurt.wav" id="6_i6uca"]
 
 [sub_resource type="Animation" id="Animation_ti1v8"]
@@ -381,6 +382,7 @@ position = Vector2(5, 0)
 shape = SubResource("CircleShape2D_rf7ue")
 
 [node name="Fireball" type="Node2D" parent="Sprite/Wand"]
+script = ExtResource("6_f2vec")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.499999, 0)

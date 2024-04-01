@@ -9,7 +9,7 @@ var immune_remaining
 var available_spells
 var available_spells_tiers
 var spells = ["Punch","Flame","Heal","Shield","Immune"]
-var spell_maximums = [1,3]
+var spell_maximums = [1,3,1,1,1]
 
 @export var upper_bound = -100
 @export var lower_bound = 350
@@ -33,7 +33,7 @@ var random = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	score = Global.score
+	Global.score = 0
 	
 	player = $Player
 	spell_selection_ui = $HUD/SpellSelection
@@ -77,6 +77,9 @@ func _process(delta):
 func start_wave():
 	music_player.play_battle()
 	wave += 1
+	if (wave == 50):
+		spells.append("Fireball")
+		spell_maximums.append(3)
 	print("Starting wave " + str(wave))
 	random.randomize()
 	var enemy_spawn_number = random.randi_range(int(1+(wave/10)),int(3+(wave/5)))
