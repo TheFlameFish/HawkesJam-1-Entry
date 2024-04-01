@@ -77,7 +77,7 @@ func _process(delta):
 func start_wave():
 	music_player.play_battle()
 	wave += 1
-	if (wave == 50):
+	if (wave == 25):
 		spells.append("Fireball")
 		spell_maximums.append(3)
 	print("Starting wave " + str(wave))

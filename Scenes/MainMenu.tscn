@@ -1,0 +1,76 @@
+[gd_scene load_steps=8 format=3 uid="uid://brqxar3lprdmn"]
+
+[ext_resource type="Script" path="res://Scripts/MainMenuScreen.gd" id="1_yyx3e"]
+[ext_resource type="AudioStream" uid="uid://vkvmfkth71lc" path="res://Sounds/music/Bionaut-battle.ogg" id="2_kki4v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pqip5"]
+bg_color = Color(0.152941, 0.152941, 0.152941, 1)
+
+[sub_resource type="SystemFont" id="SystemFont_ng7j2"]
+font_names = PackedStringArray("Bahnschrift")
+
+[sub_resource type="LabelSettings" id="LabelSettings_077ju"]
+font = SubResource("SystemFont_ng7j2")
+font_size = 128
+
+[sub_resource type="SystemFont" id="SystemFont_bsjcy"]
+font_names = PackedStringArray("Bahnschrift")
+
+[sub_resource type="SystemFont" id="SystemFont_lqorg"]
+font_names = PackedStringArray("Bahnschrift")
+
+[node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_yyx3e")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pqip5")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="Rows" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 85
+
+[node name="Title" type="Label" parent="PanelContainer/MarginContainer/Rows"]
+layout_mode = 2
+text = "Bionaut"
+label_settings = SubResource("LabelSettings_077ju")
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/MarginContainer/Rows"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Rows" type="VBoxContainer" parent="PanelContainer/MarginContainer/Rows/CenterContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 40
+
+[node name="Restart" type="Button" parent="PanelContainer/MarginContainer/Rows/CenterContainer/Rows"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_bsjcy")
+theme_override_font_sizes/font_size = 64
+text = "  Play  "
+
+[node name="Exit" type="Button" parent="PanelContainer/MarginContainer/Rows/CenterContainer/Rows"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_lqorg")
+theme_override_font_sizes/font_size = 64
+text = "Exit"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_kki4v")
+autoplay = true
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/Rows/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/Rows/Exit" to="." method="_on_exit_pressed"]
