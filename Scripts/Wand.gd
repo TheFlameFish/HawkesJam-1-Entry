@@ -63,6 +63,7 @@ func disable_spells():
 func notify_equipped():
 	punch_spell.equipped = false
 	flame_spell.equipped = false
+	fireball_spell.equipped = false
 	
 	if currentSpell == "Punch":
 		punch_spell.equipped = true

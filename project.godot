@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="HawkeJam 1 Game"
+config/name="Bionaut"
 run/main_scene="res://Scenes/MainMenu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://Textures/spell_icons/Immune_Icon.png"
 
 [autoload]
 
@@ -21,6 +21,7 @@ Global="*res://Scripts/global.gd"
 
 [display]
 
+window/size/mode=2
 window/stretch/mode="canvas_items"
 
 [input]
