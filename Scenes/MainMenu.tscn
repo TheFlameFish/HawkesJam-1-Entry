@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://brqxar3lprdmn"]
+[gd_scene load_steps=9 format=3 uid="uid://brqxar3lprdmn"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenuScreen.gd" id="1_yyx3e"]
+[ext_resource type="Script" path="res://Scenes/DifficultyButton.gd" id="2_4hm6f"]
 [ext_resource type="AudioStream" uid="uid://vkvmfkth71lc" path="res://Sounds/music/Bionaut-battle.ogg" id="2_kki4v"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pqip5"]
@@ -72,5 +73,26 @@ text = "Exit"
 stream = ExtResource("2_kki4v")
 autoplay = true
 
+[node name="Difficulty" type="Button" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -347.0
+offset_top = -209.0
+offset_right = -25.0
+offset_bottom = -25.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = SubResource("SystemFont_bsjcy")
+theme_override_font_sizes/font_size = 64
+text = " Difficulty: 
+###"
+script = ExtResource("2_4hm6f")
+
 [connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/Rows/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/Rows/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Difficulty" to="Difficulty" method="_on_pressed"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://gtufsfnhco7t"]
+[gd_scene load_steps=11 format=3 uid="uid://gtufsfnhco7t"]
 
 [ext_resource type="Script" path="res://Scripts/GameOverScreen.gd" id="1_b2nlf"]
 [ext_resource type="AudioStream" uid="uid://q64nbujd2vpo" path="res://Sounds/lose.wav" id="2_ouy8p"]
+[ext_resource type="Script" path="res://Scenes/DifficultyButton.gd" id="3_mwcmo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pqip5"]
 bg_color = Color(0.152941, 0.152941, 0.152941, 1)
@@ -21,6 +22,9 @@ font_size = 32
 font_names = PackedStringArray("Bahnschrift")
 
 [sub_resource type="SystemFont" id="SystemFont_lqorg"]
+font_names = PackedStringArray("Bahnschrift")
+
+[sub_resource type="SystemFont" id="SystemFont_hxsmb"]
 font_names = PackedStringArray("Bahnschrift")
 
 [node name="GameOverScreen" type="CanvasLayer"]
@@ -84,5 +88,26 @@ text = "Exit"
 [node name="LoseSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_ouy8p")
 
+[node name="Difficulty" type="Button" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -347.0
+offset_top = -209.0
+offset_right = -25.0
+offset_bottom = -25.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = SubResource("SystemFont_hxsmb")
+theme_override_font_sizes/font_size = 64
+text = " Difficulty: 
+###"
+script = ExtResource("3_mwcmo")
+
 [connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/Rows/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/Rows/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Difficulty" to="Difficulty" method="_on_pressed"]

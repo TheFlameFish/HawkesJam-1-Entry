@@ -74,6 +74,7 @@ func _process(delta):
 	else:
 		immune_label.text = ""
 
+
 func start_wave():
 	music_player.play_battle()
 	wave += 1
@@ -82,7 +83,11 @@ func start_wave():
 		spell_maximums.append(3)
 	print("Starting wave " + str(wave))
 	random.randomize()
-	var enemy_spawn_number = random.randi_range(int(1+(wave/10)),int(3+(wave/5)))
+	var enemy_spawn_number = random.randi_range(
+		int(ceil((1+(wave/10)) * Global.difficulty)),
+		int(ceil((3+(wave/5)) * Global.difficulty)))
+		
+	##print(str(int(3+(wave/5) * Global.difficulty)))
 	enemies_remaining = enemy_spawn_number
 	enemies_remaining_last_frame = enemy_spawn_number
 	print("Spawning " + str(enemy_spawn_number) + " enemies")
@@ -105,7 +110,9 @@ func spawn_enemy(node):
 	print("Spawned enemy at " + str(node.position) + ":")
 	print(node)
 	random.randomize()
-	node.health = round(random.randf_range(1+(wave/7),3+(wave/2)))
+	node.health = round(random.randf_range(
+		ceil((1+(wave/7)) * Global.difficulty),
+		ceil((3+(wave/2)) * Global.difficulty)))
 	print("Enemy given health: " + str(node.health))
 	
 func spawn_immune_system():

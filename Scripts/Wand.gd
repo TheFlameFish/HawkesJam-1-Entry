@@ -18,6 +18,9 @@ func _ready():
 	flame_spell = $Flame
 	fireball_spell = $Fireball
 	player = $"../.."
+	
+	if Global.difficulty < 1:
+		add_spell("Flame",3)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -32,7 +35,10 @@ func check_inputs():
 			print("Spell Next Accepted")
 			currentSpellIndex = newSpellIndex
 			currentSpell = obtainedSpells[currentSpellIndex]
-			print(currentSpell)
+		else:
+			currentSpellIndex = 0
+			currentSpell = obtainedSpells[currentSpellIndex]
+		print(currentSpell)
 	if Input.is_action_just_released("spell_previous"):
 		print("Spell Previous Attempted")
 		var newSpellIndex = currentSpellIndex - 1
@@ -40,7 +46,10 @@ func check_inputs():
 			print("Spell Previous Accepted")
 			currentSpellIndex = newSpellIndex
 			currentSpell = obtainedSpells[currentSpellIndex]
-			print(currentSpell)
+		else:
+			currentSpellIndex = obtainedSpells.size() - 1
+			currentSpell = obtainedSpells[currentSpellIndex]
+		print(currentSpell)
 	
 	notify_equipped()
 	
