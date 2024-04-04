@@ -20,7 +20,8 @@ func _ready():
 	player = $"../.."
 	
 	if Global.difficulty < 1:
-		add_spell("Flame",3)
+		#add_spell("Flame",3)
+		punch_spell = $EasyPunch
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
