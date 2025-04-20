@@ -1,11 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://brqxar3lprdmn"]
+[gd_scene load_steps=9 format=3 uid="uid://brqxar3lprdmn"]
 
-[ext_resource type="Script" uid="uid://d0trfuwrvu34l" path="res://Scripts/MainMenuScreen.gd" id="1_yyx3e"]
-[ext_resource type="Script" uid="uid://jccc6d6xibh3" path="res://Scenes/DifficultyButton.gd" id="2_4hm6f"]
+[ext_resource type="Script" path="res://Scripts/MainMenuScreen.gd" id="1_yyx3e"]
+[ext_resource type="Script" path="res://Scenes/DifficultyButton.gd" id="2_4hm6f"]
 [ext_resource type="AudioStream" uid="uid://vkvmfkth71lc" path="res://Sounds/music/Bionaut-battle.ogg" id="2_kki4v"]
-[ext_resource type="Script" uid="uid://co78ip65322tj" path="res://Scripts/MusicPlayer.gd" id="4_arci0"]
-[ext_resource type="AudioStream" uid="uid://bupv7rno8oisi" path="res://Sounds/music/Bionaut-battle-intro.ogg" id="5_ay83m"]
-[ext_resource type="AudioStream" uid="uid://b7uonw6dsanvi" path="res://Sounds/music/Bionaut-battle-loop.ogg" id="6_ayew5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pqip5"]
 bg_color = Color(0.152941, 0.152941, 0.152941, 1)
@@ -74,6 +71,7 @@ text = "Exit"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_kki4v")
+autoplay = true
 
 [node name="Difficulty" type="Button" parent="."]
 anchors_preset = 3
@@ -95,16 +93,6 @@ text = " Difficulty:
 ###"
 script = ExtResource("2_4hm6f")
 
-[node name="MusicPlayer" type="Node" parent="."]
-script = ExtResource("4_arci0")
-
-[node name="BattleIntro" type="AudioStreamPlayer" parent="MusicPlayer"]
-stream = ExtResource("5_ay83m")
-
-[node name="BattleLoop" type="AudioStreamPlayer" parent="MusicPlayer"]
-stream = ExtResource("6_ayew5")
-
 [connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/Rows/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/Rows/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Difficulty" to="Difficulty" method="_on_pressed"]
-[connection signal="finished" from="MusicPlayer/BattleIntro" to="MusicPlayer" method="_on_battle_intro_finished"]

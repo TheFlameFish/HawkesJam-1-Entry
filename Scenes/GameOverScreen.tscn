@@ -1,15 +1,14 @@
 [gd_scene load_steps=11 format=3 uid="uid://gtufsfnhco7t"]
 
-[ext_resource type="Script" uid="uid://uioy4qxipjgc" path="res://Scripts/GameOverScreen.gd" id="1_b2nlf"]
+[ext_resource type="Script" path="res://Scripts/GameOverScreen.gd" id="1_b2nlf"]
 [ext_resource type="AudioStream" uid="uid://q64nbujd2vpo" path="res://Sounds/lose.wav" id="2_ouy8p"]
-[ext_resource type="Script" uid="uid://jccc6d6xibh3" path="res://Scenes/DifficultyButton.gd" id="3_mwcmo"]
+[ext_resource type="Script" path="res://Scenes/DifficultyButton.gd" id="3_mwcmo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pqip5"]
 bg_color = Color(0.152941, 0.152941, 0.152941, 1)
 
 [sub_resource type="SystemFont" id="SystemFont_ng7j2"]
 font_names = PackedStringArray("Bahnschrift")
-subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_077ju"]
 font = SubResource("SystemFont_ng7j2")

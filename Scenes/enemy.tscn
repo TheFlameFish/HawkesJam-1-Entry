@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://baefmaialchoi"]
 
-[ext_resource type="Script" uid="uid://f87j88phdr77" path="res://Scripts/enemy.gd" id="1_n6g3a"]
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_n6g3a"]
 [ext_resource type="Texture2D" uid="uid://c3bqoto4aec5h" path="res://Textures/bacteria.png" id="1_w1rad"]
 [ext_resource type="Texture2D" uid="uid://ckf0urvy84xsh" path="res://Textures/Health Bar Layer 1.png" id="3_73a4e"]
 [ext_resource type="Texture2D" uid="uid://c3xvucgja2r8x" path="res://Textures/Health Bar Layer 2.png" id="4_li02k"]
@@ -58,9 +58,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_paybm"]
 _data = {
-&"RESET": SubResource("Animation_q1kbl"),
-&"wiggle": SubResource("Animation_ba6ee"),
-&"wiggle_slow": SubResource("Animation_4cm78")
+"RESET": SubResource("Animation_q1kbl"),
+"wiggle": SubResource("Animation_ba6ee"),
+"wiggle_slow": SubResource("Animation_4cm78")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xp1qc"]

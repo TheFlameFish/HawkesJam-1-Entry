@@ -1,11 +1,11 @@
 [gd_scene load_steps=45 format=3 uid="uid://dsffyc8e6vgif"]
 
-[ext_resource type="Script" uid="uid://7xxo1sn1ygj0" path="res://Scripts/player.gd" id="1_w3y5j"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_w3y5j"]
 [ext_resource type="Texture2D" uid="uid://yqp5gfq2k6fm" path="res://Textures/doctor3.png" id="2_3nnn8"]
-[ext_resource type="Script" uid="uid://cloqa2dkxk2c" path="res://Scripts/Wand.gd" id="3_2v0h6"]
-[ext_resource type="Script" uid="uid://dps5lk31syyfc" path="res://Scripts/Flame.gd" id="3_oabw3"]
-[ext_resource type="Script" uid="uid://b7vxhn8bdgu2w" path="res://Scripts/Punch.gd" id="4_ntvbj"]
-[ext_resource type="Script" uid="uid://cumhmfhnxiv4q" path="res://Scripts/Fireball.gd" id="6_f2vec"]
+[ext_resource type="Script" path="res://Scripts/Wand.gd" id="3_2v0h6"]
+[ext_resource type="Script" path="res://Scripts/Flame.gd" id="3_oabw3"]
+[ext_resource type="Script" path="res://Scripts/Punch.gd" id="4_ntvbj"]
+[ext_resource type="Script" path="res://Scripts/Fireball.gd" id="6_f2vec"]
 [ext_resource type="AudioStream" uid="uid://cmutg3dnaa5a6" path="res://Sounds/hurt.wav" id="6_i6uca"]
 
 [sub_resource type="Animation" id="Animation_ti1v8"]
@@ -228,19 +228,19 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_01cc3"]
 _data = {
-&"RESET": SubResource("Animation_ti1v8"),
-&"casting": SubResource("Animation_fkl00"),
-&"idle_back": SubResource("Animation_fnbpv"),
-&"idle_forward": SubResource("Animation_pm3hv"),
-&"idle_left": SubResource("Animation_jdbdx"),
-&"idle_right": SubResource("Animation_3te4p"),
-&"punch": SubResource("Animation_xqk5c"),
-&"run_left": SubResource("Animation_gxgxo"),
-&"run_right": SubResource("Animation_57uc6"),
-&"walk_back": SubResource("Animation_ea8oq"),
-&"walk_forward": SubResource("Animation_76rh7"),
-&"walk_left": SubResource("Animation_uiveg"),
-&"walk_right": SubResource("Animation_qsf10")
+"RESET": SubResource("Animation_ti1v8"),
+"casting": SubResource("Animation_fkl00"),
+"idle_back": SubResource("Animation_fnbpv"),
+"idle_forward": SubResource("Animation_pm3hv"),
+"idle_left": SubResource("Animation_jdbdx"),
+"idle_right": SubResource("Animation_3te4p"),
+"punch": SubResource("Animation_xqk5c"),
+"run_left": SubResource("Animation_gxgxo"),
+"run_right": SubResource("Animation_57uc6"),
+"walk_back": SubResource("Animation_ea8oq"),
+"walk_forward": SubResource("Animation_76rh7"),
+"walk_left": SubResource("Animation_uiveg"),
+"walk_right": SubResource("Animation_qsf10")
 }
 
 [sub_resource type="Gradient" id="Gradient_polxt"]
