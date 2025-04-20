@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 func _ready():
-	pass
+	$MusicPlayer.play_battle()
 
 func _on_restart_pressed():
 	get_tree().change_scene_to_file("res://Scenes/main.tscn")
