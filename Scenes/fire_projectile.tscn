@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://cprynkgrmql5u"]
 
 [ext_resource type="Texture2D" uid="uid://co4ets8rcrykq" path="res://Textures/shot_fireball.png" id="1_62y14"]
-[ext_resource type="Script" path="res://Scripts/fire_projectile.gd" id="1_txx1k"]
+[ext_resource type="Script" uid="uid://cs0esqoy3lmj2" path="res://Scripts/fire_projectile.gd" id="1_txx1k"]
 [ext_resource type="AudioStream" uid="uid://c1y74ltershv" path="res://Sounds/fireball.wav" id="3_s2rdm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cmtb5"]

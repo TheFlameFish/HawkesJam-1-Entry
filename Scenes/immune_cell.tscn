@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cox3j6qg1gq0b"]
 
-[ext_resource type="Script" path="res://Scripts/immune.gd" id="1_b7v6u"]
+[ext_resource type="Script" uid="uid://bh7d7w1w2ys8a" path="res://Scripts/immune.gd" id="1_b7v6u"]
 [ext_resource type="Texture2D" uid="uid://bpylynfhl8j3q" path="res://Textures/macrophage.png" id="2_o45sv"]
 [ext_resource type="Texture2D" uid="uid://ckf0urvy84xsh" path="res://Textures/Health Bar Layer 1.png" id="3_wwsv1"]
 [ext_resource type="Texture2D" uid="uid://c3xvucgja2r8x" path="res://Textures/Health Bar Layer 2.png" id="4_y2sfu"]

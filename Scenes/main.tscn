@@ -1,23 +1,23 @@
 [gd_scene load_steps=54 format=3 uid="uid://ch5jab7mudhle"]
 
-[ext_resource type="Script" path="res://Scripts/main.gd" id="1_dpscn"]
+[ext_resource type="Script" uid="uid://b1dumdhpgheci" path="res://Scripts/main.gd" id="1_dpscn"]
 [ext_resource type="PackedScene" uid="uid://dsffyc8e6vgif" path="res://Scenes/player.tscn" id="1_hlq75"]
 [ext_resource type="Texture2D" uid="uid://bouaa1cmgl35f" path="res://Textures/Flesh/Floor_Full.png" id="2_b0jmd"]
 [ext_resource type="Texture2D" uid="uid://dphpiretlkthn" path="res://Textures/Flesh/Floor_Edge.png" id="3_4x640"]
 [ext_resource type="Texture2D" uid="uid://vncbpjdqm1ia" path="res://Textures/Flesh/Floor_Corner.png" id="4_11ehc"]
 [ext_resource type="Texture2D" uid="uid://ouxytc5mc86u" path="res://Textures/Flesh/Floor_Tiles.png" id="4_dyv7m"]
 [ext_resource type="Texture2D" uid="uid://bjnifgbewkywd" path="res://Textures/blood_cell.png" id="7_7ql1w"]
-[ext_resource type="Script" path="res://Scripts/HealthDisplay.gd" id="8_l7xgn"]
+[ext_resource type="Script" uid="uid://5qj68xn4vfh3" path="res://Scripts/HealthDisplay.gd" id="8_l7xgn"]
 [ext_resource type="Texture2D" uid="uid://c8ghhv8kvd678" path="res://Textures/Heart2.png" id="8_wqfsx"]
-[ext_resource type="Script" path="res://Scripts/Heart.gd" id="9_hoebn"]
-[ext_resource type="Script" path="res://Scripts/SpellLabel.gd" id="11_2ryi5"]
+[ext_resource type="Script" uid="uid://kymdoltk2a7x" path="res://Scripts/Heart.gd" id="9_hoebn"]
+[ext_resource type="Script" uid="uid://dnquch5k87kcn" path="res://Scripts/SpellLabel.gd" id="11_2ryi5"]
 [ext_resource type="Texture2D" uid="uid://ckf0urvy84xsh" path="res://Textures/Health Bar Layer 1.png" id="12_y4byk"]
 [ext_resource type="Texture2D" uid="uid://dqydjvb4qikhi" path="res://Textures/ManaBarProgress.png" id="13_5enu5"]
-[ext_resource type="Script" path="res://Scripts/ManaBar.gd" id="14_31fjk"]
+[ext_resource type="Script" uid="uid://bmhjyuj7k34t8" path="res://Scripts/ManaBar.gd" id="14_31fjk"]
 [ext_resource type="Texture2D" uid="uid://bb8y3dim0b3ct" path="res://Textures/Selection_Box3.png" id="15_dadcx"]
-[ext_resource type="Script" path="res://Scripts/SpellSelectionUI.gd" id="16_oscjm"]
+[ext_resource type="Script" uid="uid://cdc573x6bewew" path="res://Scripts/SpellSelectionUI.gd" id="16_oscjm"]
 [ext_resource type="Texture2D" uid="uid://caqq6xhiuukt1" path="res://Textures/Box.png" id="17_m1opn"]
-[ext_resource type="Script" path="res://Scripts/MusicPlayer.gd" id="18_tqslb"]
+[ext_resource type="Script" uid="uid://co78ip65322tj" path="res://Scripts/MusicPlayer.gd" id="18_tqslb"]
 [ext_resource type="AudioStream" uid="uid://bupv7rno8oisi" path="res://Sounds/music/Bionaut-battle-intro.ogg" id="19_qwflx"]
 [ext_resource type="AudioStream" uid="uid://b7uonw6dsanvi" path="res://Sounds/music/Bionaut-battle-loop.ogg" id="20_eijkt"]
 
@@ -171,11 +171,11 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pj2ij"]
 _data = {
-"Decay": SubResource("Animation_wh4fp"),
-"Default": SubResource("Animation_p4v55"),
-"RESET": SubResource("Animation_kv3ea"),
-"Regenerate": SubResource("Animation_7ecko"),
-"Shielded": SubResource("Animation_5qbf4")
+&"Decay": SubResource("Animation_wh4fp"),
+&"Default": SubResource("Animation_p4v55"),
+&"RESET": SubResource("Animation_kv3ea"),
+&"Regenerate": SubResource("Animation_7ecko"),
+&"Shielded": SubResource("Animation_5qbf4")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hhqun"]
